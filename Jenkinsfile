@@ -6,7 +6,7 @@ pipeline {
         DOCKER_REGISTRY = 'chirag1212'
         DOCKER_IMAGE_NAME = 'final-task'
         DOCKER_CREDENTIALS = 'dockerHub-Id'
-        KUBERNETES_NAMESPACE = 'default'
+        KUBERNETES_NAMESPACE = 'jenkins'
         HELM_RELEASE_NAME = 'fruitables'
         HELM_CHART_PATH = './helmChart/Chart.yaml'
     }
@@ -14,7 +14,7 @@ pipeline {
         stage('Source Code Checkout') {
             steps {
                 // Pull code from the Git repository
-                git branch: 'main', url: 'https://github.com/TankChirag-1212/final-Task.git'
+                git branch: 'main', url: 'https://github.com/TankChirag-1212/Fruitables-Website.git'
             }
         }
 
@@ -32,7 +32,7 @@ pipeline {
                 script {
                     // Push Docker image to Docker registry
                     docker.withRegistry('', 'docker-credentials-id') {
-                        docker.image("${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:latest").push('latest')
+                        docker.image("${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:v2").push('v2')
                     }
                 }
             }
@@ -42,12 +42,12 @@ pipeline {
             steps {
                 script {
                     // Deploy Docker image to Kubernetes using Helm
-                    withKubeConfig([credentialsId: 'kubeconfig-credentials-id', contextName: 'your-kube-context']) {
+                    withKubeConfig([credentialsId: 'kubeconfig-token']) {
                         sh """
                         helm upgrade --install ${HELM_RELEASE_NAME} ${HELM_CHART_PATH} \
                         --namespace ${KUBERNETES_NAMESPACE} \
                         --set image.repository=${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME} \
-                        --set image.tag=latest
+                        --set image.tag=v2
                         """
                     }
                 }
