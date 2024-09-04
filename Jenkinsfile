@@ -18,25 +18,25 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    // Build Docker image from Dockerfile
-                    def dockerImage = docker.build("${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:v2")
-                }
-            }
-        }
+        // stage('Build Docker Image') {
+        //     steps {
+        //         script {
+        //             // Build Docker image from Dockerfile
+        //             def dockerImage = docker.build("${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:v2")
+        //         }
+        //     }
+        // }
 
-        stage('Push Docker Image') {
-            steps {
-                script {
-                    // Push Docker image to Docker registry
-                    docker.withRegistry('', 'docker-credentials-id') {
-                        docker.image("${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:v2").push('v2')
-                    }
-                }
-            }
-        }
+        // stage('Push Docker Image') {
+        //     steps {
+        //         script {
+        //             // Push Docker image to Docker registry
+        //             docker.withRegistry('', 'docker-credentials-id') {
+        //                 docker.image("${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:v2").push('v2')
+        //             }
+        //         }
+        //     }
+        // }
 
         stage('Deploy to Kubernetes') {
             steps {
@@ -47,7 +47,7 @@ pipeline {
                         helm upgrade --install ${HELM_RELEASE_NAME} ${HELM_CHART_PATH} \
                         --namespace ${KUBERNETES_NAMESPACE} \
                         --set image.repository=${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME} \
-                        --set image.tag=v2
+                        --set image.tag=v1.0
                         """
                     }
                 }
