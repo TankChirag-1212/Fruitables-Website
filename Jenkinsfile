@@ -14,7 +14,7 @@ pipeline {
         stage('Source Code Checkout') {
             steps {
                 // Pull code from the Git repository
-                git branch: 'main', url: 'https://github.com/TankChirag-1212/Fruitables-Website.git'
+                git branch: 'master', url: 'https://github.com/TankChirag-1212/Fruitables-Website.git'
             }
         }
 
