@@ -5,7 +5,7 @@ pipeline {
         // Define environment variables
         DOCKER_REGISTRY = 'chirag1212'
         DOCKER_IMAGE_NAME = 'final-task'
-        DOCKER_CREDENTIALS = 'dockerHub-Id'
+        DOCKER_CREDENTIALS = 'd784ec34-84a6-4363-8d99-5ac8be4a8df8'
         KUBERNETES_NAMESPACE = 'jenkins'
         HELM_RELEASE_NAME = 'fruitables'
         HELM_CHART_PATH = './helmChart/Chart.yaml'
@@ -18,25 +18,25 @@ pipeline {
             }
         }
 
-        // stage('Build Docker Image') {
-        //     steps {
-        //         script {
-        //             // Build Docker image from Dockerfile
-        //             def dockerImage = docker.build("${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:v2")
-        //         }
-        //     }
-        // }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build Docker image from Dockerfile
+                    def dockerImage = docker.build("${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:v2.0")
+                }
+            }
+        }
 
-        // stage('Push Docker Image') {
-        //     steps {
-        //         script {
-        //             // Push Docker image to Docker registry
-        //             docker.withRegistry('', 'docker-credentials-id') {
-        //                 docker.image("${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:v2").push('v2')
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    // Push Docker image to Docker registry
+                    docker.withRegistry('', 'docker-credentials-id') {
+                        docker.image("${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:v2.0").push('v2.0')
+                    }
+                }
+            }
+        }
 
         stage('Deploy to Kubernetes') {
             steps {
@@ -47,7 +47,7 @@ pipeline {
                         helm upgrade --install ${HELM_RELEASE_NAME} ${HELM_CHART_PATH} \
                         --namespace ${KUBERNETES_NAMESPACE} \
                         --set image.repository=${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME} \
-                        --set image.tag=v1.0
+                        --set image.tag=v2.0
                         """
                     }
                 }
