@@ -8,7 +8,8 @@ pipeline {
         DOCKER_CREDENTIALS = 'd784ec34-84a6-4363-8d99-5ac8be4a8df8'
         KUBERNETES_NAMESPACE = 'jenkins'
         HELM_RELEASE_NAME = 'fruitables'
-        HELM_CHART_PATH = './helmChart/Chart.yaml'
+        HELM_CHART_PATH = './helmChart'
+        HELM_PACKAGE_NAME = 'frontend-1.0.0.tgz'
     }
     stages {
         stage('Source Code Checkout') {
@@ -44,7 +45,8 @@ pipeline {
                     // Deploy Docker image to Kubernetes using Helm
                     withKubeConfig([credentialsId: 'ORIGINAL_K8S_CONFIG']) {
                         sh """
-                        helm upgrade --install ${HELM_RELEASE_NAME} ${HELM_CHART_PATH} --namespace ${KUBERNETES_NAMESPACE} --set image.repository="${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}" --set image.tag=v2.0
+                        helm package ${HELM_CHART_PATH}
+                        helm upgrade --install ${HELM_RELEASE_NAME} ${HELM_PACKAGE_NAME} --namespace ${KUBERNETES_NAMESPACE} --set image.repository="${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}" --set image.tag=v2.0
                         """
                     }
                 }
