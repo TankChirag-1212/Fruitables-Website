@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: chirag1212/final-task
+  repository: chirag1212/day33-task
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: v2
+  tag: frontend-v3
 
 imagePullSecrets: []
 nameOverride: ""
@@ -40,8 +40,8 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  name: frontend-service
-  type: NodePort
+  name: fruitables-service
+  type: ClusterIP
   port: 80
   targetPort: 80
 

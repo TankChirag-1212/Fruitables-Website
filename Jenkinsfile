@@ -9,7 +9,7 @@ pipeline {
         KUBERNETES_NAMESPACE = 'jenkins'
         HELM_RELEASE_NAME = 'fruitables'
         HELM_CHART_PATH = './helmChart'
-        HELM_PACKAGE_NAME = 'frontend-1.0.0.tgz'
+        HELM_PACKAGE_NAME = 'fruitables-1.0.0.tgz'
     }
     stages {
         stage('Source Code Checkout') {
@@ -46,7 +46,7 @@ pipeline {
                     withKubeConfig([credentialsId: 'ORIGINAL_K8S_CONFIG']) {
                         sh """
                         helm package ${HELM_CHART_PATH}
-                        helm upgrade --install ${HELM_RELEASE_NAME} ${HELM_PACKAGE_NAME} --namespace ${KUBERNETES_NAMESPACE} --set image.repository="${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}" --set image.tag=v2.0
+                        helm upgrade --install ${HELM_RELEASE_NAME} ./${HELM_PACKAGE_NAME} --namespace ${KUBERNETES_NAMESPACE} --set image.repository="${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}" --set image.tag=v2.0
                         """
                     }
                 }
