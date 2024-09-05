@@ -42,7 +42,7 @@ pipeline {
             steps {
                 script {
                     // Deploy Docker image to Kubernetes using Helm
-                    withKubeConfig([credentialsId: 'kubeconfig-token']) {
+                    withKubeConfig([credentialsId: 'kubeconfig-file']) {
                         sh """
                         helm upgrade --install ${HELM_RELEASE_NAME} ${HELM_CHART_PATH} --namespace ${KUBERNETES_NAMESPACE} --set image.repository="${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}" --set image.tag=v2.0
                         """
