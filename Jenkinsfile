@@ -5,9 +5,9 @@ pipeline {
         // Define environment variables
         DOCKER_REGISTRY = 'chirag1212'
         DOCKER_IMAGE_NAME = 'final-task'
-        DOCKER_CREDENTIALS = 'd784ec34-84a6-4363-8d99-5ac8be4a8df8'
+        DOCKER_CREDENTIALS = 'docker-credentails-id'
         KUBERNETES_NAMESPACE = 'default'
-        KUBERNETES_CREDENTIALS = 'ORIGINAL_K8S_CONFIG'
+        KUBERNETES_CREDENTIALS = 'kubeconfig-id'
         HELM_RELEASE_NAME = 'fruitables'
         HELM_CHART_PATH = './helmChart'
         HELM_PACKAGE_NAME = 'fruitables-1.0.0.tgz'
