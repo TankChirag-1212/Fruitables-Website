@@ -5,7 +5,7 @@ pipeline {
         // Define environment variables
         DOCKER_REGISTRY = 'chirag1212'
         DOCKER_IMAGE_NAME = 'final-task'
-        DOCKER_CREDENTIALS = 'docker-credentails-id'
+        DOCKER_CREDENTIALS = 'docker-credentials-id'
         KUBERNETES_NAMESPACE = 'default'
         KUBERNETES_CREDENTIALS = 'kubeconfig-id'
         HELM_RELEASE_NAME = 'fruitables'
