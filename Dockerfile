@@ -5,7 +5,7 @@ FROM nginx:latest
 WORKDIR /usr/share/nginx/html
 
 # Copy all website files from the current directory on your host to the container
-COPY . /usr/share/nginx/html
+COPY . .
 
 # Expose port 80 to allow access to the web server
 EXPOSE 80
