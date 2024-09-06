@@ -17,16 +17,34 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
+        <script>
+            
+            var s3BucketUrl = 'https://s3.ap-southeast-2.amazonaws.com/fruitables-1.0.0-chirag/'
+            window.onload = function(){
+                document.getElementById('bootsrtapCSS').href = s3BucketUrl + 'css/bootstrap.min.css';
+                document.getElementById('styleCSS').href = s3BucketUrl + 'css/style.css';
+                document.getElementById('mainJS').href = s3BucketUrl + 'js/main.js';
+                document.getElementById('paymentimg').href = s3BucketUrl + 'img/payment.png';
+                document.getElementById('lib-lightbox-css').href = s3BucketUrl + 'lib/lightbox/css/lightbox.min.css';
+                document.getElementById('lib-carousel-assets').href = s3BucketUrl + 'lib/owlcarousel/assets/owl.carousel.min.css';
+                document.getElementById('lib-easing-js').href = s3BucketUrl + 'lib/easing/easing.min.js';
+                document.getElementById('lib-waypoints-js').href = s3BucketUrl + 'lib/waypoints/waypoints.min.js';
+                document.getElementById('lib-lightbox-js').href = s3BucketUrl + 'lib/lightbox/js/lightbox.min.js';
+                document.getElementById('lib-carousel-js').href = s3BucketUrl + 'lib/owlcarousel/owl.carousel.min.js';
+            }
+        </script>
+
+
         <!-- Libraries Stylesheet -->
-        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link id="lib-carousel-assets" rel="stylesheet">
+        <link id="lib-lightbox-css" rel="stylesheet">
 
 
         <!-- Customized Bootstrap Stylesheet -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link id="bootsrtapCSS" rel="stylesheet">
 
         <!-- Template Stylesheet -->
-        <link href="css/style.css" rel="stylesheet">
+        <link id="styleCSS" rel="stylesheet">
     </head>
 
     <body>
@@ -278,7 +296,7 @@
                             <p>Email: Example@gmail.com</p>
                             <p>Phone: +0123 4567 8910</p>
                             <p>Payment Accepted</p>
-                            <img src="img/payment.png" class="img-fluid" alt="">
+                            <img id="paymentimg" class="img-fluid" alt="">
                         </div>
                     </div>
                 </div>
@@ -313,13 +331,13 @@
     <!-- JavaScript Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/lightbox/js/lightbox.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script id="lib-carousel-js"></script>
+    <script id="lib-easing-js"></script>
+    <script id="lib-lightbox-js"></script>
+    <script id="lib-waypoints-js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script id="mainJS"></script>
     </body>
 
 </html>
