@@ -1,4 +1,4 @@
-var s3BucketUrl = 'https://s3.ap-southeast-2.amazonaws.com/fruitables-1.0.0-chirag/';
+var s3BucketUrl = 'https://<s3-bucket-url>';
 
 window.onload = function() {
     document.getElementById('bootstrapCSS').href = s3BucketUrl + 'css/bootstrap.min.css';
