@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image from Dockerfile
-                    def dockerImage = docker.build("${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:v3.0")
+                    def dockerImage = docker.build("${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:v3.1")
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
                 script {
                     // Push Docker image to Docker registry
                     docker.withRegistry('', DOCKER_CREDENTIALS) {
-                        docker.image("${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:v3.0").push('v3.0')
+                        docker.image("${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:v3.1").push('v3.1')
                     }
                 }
             }
@@ -47,7 +47,7 @@ pipeline {
                     withKubeConfig([credentialsId: KUBERNETES_CREDENTIALS]) {
                         sh """
                         helm package ${HELM_CHART_PATH}
-                        helm upgrade --install ${HELM_RELEASE_NAME} ./${HELM_PACKAGE_NAME} --namespace ${KUBERNETES_NAMESPACE} --set image.repository="${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}" --set image.tag=v3.0
+                        helm upgrade --install ${HELM_RELEASE_NAME} ./${HELM_PACKAGE_NAME} --namespace ${KUBERNETES_NAMESPACE} --set image.repository="${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}" --set image.tag=v3.1
                         """
                     }
                 }
