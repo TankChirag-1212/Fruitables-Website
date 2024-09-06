@@ -22,9 +22,9 @@
             window.onload = function() {
                 document.getElementById('bootstrapCss').href = s3BucketUrl + 'css/bootstrap.min.css';
                 document.getElementById('styleCss').href = s3BucketUrl + 'css/style.css';
-                document.getElementById('lib-lightbox-css').src = s3BucketUrl + 'lib/lightbox/css/lightbox.min.css';
+                document.getElementById('lib-lightbox-css').href = s3BucketUrl + 'lib/lightbox/css/lightbox.min.css';
+                document.getElementById('lib-carousel-assets').href = s3BucketUrl + 'lib/owlcarousel/assets/owl.carousel.min.css';
                 document.getElementById('paymentImage').src = s3BucketUrl + 'img/payment.png';
-                document.getElementById('lib-carousel-assets').src = s3BucketUrl + 'lib/owlcarousel/assets/owl.carousel.min.css';
                 document.getElementById('mainJs').src = s3BucketUrl + 'js/main.js';
                 document.getElementById('lib-easing-js').src = s3BucketUrl + 'lib/easing/easing.min.js';
                 document.getElementById('lib-waypoints-js').src = s3BucketUrl + 'lib/waypoints/waypoints.min.js';
